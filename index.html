@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Story Hindi ❤️</title>
+    
+    <!-- Google Fonts: Noto Serif Devanagari -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest Link -->
+    <link rel="manifest" href="./manifest.json">
+    <!-- Apple Mobile Web App Meta Tags (iOS के लिए) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Love Story">
+
+    <!-- AdSense Main Script (load once in head or early body) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-2657289467945272" crossorigin="anonymous"></script>
+
+    <style>
+        /* Basic Reset & Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Noto Serif Devanagari', serif;
+            background-color: #fce4ec; /* Light pink background */
+            color: #4a148c; /* Dark purple text */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top for mobile scroll */
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* App Container */
+        #app-container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 80vh; /* Ensure some height for content */
+            padding-bottom: 20px; /* Space for buttons at the bottom */
+        }
+
+        /* Header */
+        #app-header {
+            background-color: #e91e63; /* Pink header */
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #app-title {
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        #user-display-name {
+            font-size: 1em;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        /* Screen Management */
+        .screen {
+            padding: 20px;
+            flex-grow: 1; /* Allow screens to take available space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically within screen */
+            align-items: center; /* Center content horizontally within screen */
+            text-align: center;
+        }
+
+        .screen.hidden {
+            display: none;
+        }
+
+        #app-header.hidden {
+            display: none;
+        }
+
+        /* Login Screen */
+        #login-screen h2 {
+            color: #e91e63;
+            margin-bottom: 25px;
+            font-size: 1.6em;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #6a1b9a;
+        }
+
+        .input-group input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ffab91; /* Light orange border */
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+            font-family: 'Noto Serif Devanagari', serif;
+            color: #4a148c;
+        }
+
+        button {
+            background-color: #ff5252; /* Red button */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            font-family: 'Noto Serif Devanagari', serif;
+        }
+
+        button:hover {
+            background-color: #e04040;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Chapter List Screen */
+        #chapter-list-screen h2 {
+            color: #e91e63;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+        }
+
+        #chapter-list {
+            list-style: none;
+            padding: 0;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        #chapter-list li {
+            background-color: #ffe0b2; /* Light orange background for list items */
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #chapter-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #chapter-list li a {
+            display: block;
+            padding: 15px;
+            text-decoration: none;
+            color: #6a1b9a;
+            font-weight: 700;
+            font-size: 1.1em;
+            text-align: left;
+        }
+
+        #chapter-list li a:hover {
+            background-color: #ffcc80; /* Slightly darker orange on hover */
+        }
+
+        /* Story Screen */
+        #story-screen {
+            justify-content: flex-start; /* Align content to top for story text */
+        }
+
+        #story-screen h2 {
+            color: #e91e63;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        #story-content-container {
+            background-color: #fff3e0; /* Very light orange for story background */
+            padding: 20px;
+            border-radius: 10px;
+            line-height: 1.8;
+            text-align: justify;
+            max-height: 60vh; /* Limit height for scrollability */
+            overflow-y: auto; /* Enable scrolling for long content */
+            margin-bottom: 20px;
+            color: #4a148c;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        #story-page-content {
+            margin: 0;
+            white-space: pre-wrap; /* Preserves whitespace and line breaks */
+        }
+
+        #page-indicator {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #7b1fa2;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            padding: 10px 0;
+            border-top: 1px solid #ffe0b2;
+        }
+
+        .navigation-buttons .nav-btn {
+            padding: 10px 20px;
+            font-size: 1em;
+            min-width: 100px;
+        }
+
+        /* AdSense Placeholders */
+        .ad-banner-placeholder, .ad-interstitial-placeholder {
+            background-color: #eceff1; /* Light gray */
+            border: 1px dashed #b0bec5; /* Dashed border */
+            padding: 10px;
+            margin: 10px auto;
+            text-align: center;
+            font-size: 0.8em;
+            color: #78909c;
+            width: 90%;
+            max-width: 728px; /* Standard banner width */
+            box-sizing: border-box;
+        }
+
+        .ad-interstitial-placeholder.hidden {
+            display: none;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            #app-container {
+                border-radius: 0;
+                min-height: 100vh;
+                max-width: 100%;
+                box-shadow: none;
+            }
+
+            #app-header {
+                border-radius: 0;
+                padding: 10px 15px;
+            }
+
+            #app-title {
+                font-size: 1.5em;
+            }
+
+            #login-screen h2, #chapter-list-screen h2, #story-screen h2 {
+                font-size: 1.4em;
+            }
+
+            .screen {
+                padding: 15px;
+            }
+
+            .input-group input[type="text"],
+            button {
+                padding: 10px;
+                font-size: 1em;
+            }
+
+            #chapter-list li a {
+                font-size: 1em;
+                padding: 12px;
+            }
+
+            #story-content-container {
+                padding: 15px;
+                max-height: 65vh; /* Adjust for smaller screens */
+            }
+
+            .navigation-buttons .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.9em;
+                min-width: 80px;
+            }
+
+            .ad-banner-placeholder {
+                margin: 5px auto;
+                padding: 8px;
+                max-width: 320px; /* Common mobile banner size */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app-container">
+        <header id="app-header" class="hidden"> <!-- Header hidden initially -->
+            <h1 id="app-title">Love Story Hindi ❤️</h1>
+            <span id="user-display-name"></span>
+        </header>
+
+        <!-- Google AdSense Banner Placeholder -->
+        <div class="ad-banner-placeholder">
+            <p>Google AdSense Banner Ad (Placeholder)</p>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-app-pub-2657289467945272"
+                 data-ad-slot="3123545645"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- Login Screen -->
+        <div id="login-screen" class="screen active">
+            <h2>आपका स्वागत है!</h2>
+            <div class="input-group">
+                <label for="user-name">अपना नाम दर्ज करें:</label>
+                <input type="text" id="user-name" placeholder="आपका नाम">
+            </div>
+            <button id="login-button">शुरू करें</button>
+        </div>
+
+        <!-- Chapter List Screen -->
+        <div id="chapter-list-screen" class="screen hidden">
+            <h2>कहानियों की सूची</h2>
+            <ul id="chapter-list">
+                <!-- Chapters will be loaded here by JavaScript -->
+            </ul>
+        </div>
+
+        <!-- Story Screen -->
+        <div id="story-screen" class="screen hidden">
+            <h2 id="story-title"></h2>
+            <div id="story-content-container">
+                <p id="story-page-content"></p>
+                <p id="page-indicator"></p>
+            </div>
+            <div class="navigation-buttons">
+                <button id="prev-page-btn" class="nav-btn" disabled>पिछला</button>
+                <button id="home-btn" class="nav-btn">मुख्य सूची</button>
+                <button id="next-page-btn" class="nav-btn">अगला</button>
+            </div>
+        </div>
+
+        <!-- Google AdSense Interstitial Placeholder -->
+        <div class="ad-interstitial-placeholder hidden">
+            <p>Google AdSense Interstitial Ad (Placeholder)</p>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-app-pub-2657289467945272"
+                 data-ad-slot="3236625088"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript Code
+        // AdSense related placeholder variables (using provided IDs)
+        const AD_CLIENT_ID = "ca-app-pub-2657289467945272";
+        const BANNER_AD_SLOT = "3123545645";
+        const INTERSTITIAL_AD_SLOT = "3236625088";
+
+        // Global variables
+        let currentChapterIndex = 0;
+        let currentPageIndex = 0;
+        let userName = "";
+
+        // DOM Elements
+        const appHeader = document.getElementById('app-header');
+        const appTitle = document.getElementById('app-title');
+        const userDisplayName = document.getElementById('user-display-name');
+        const loginScreen = document.getElementById('login-screen');
+        const chapterListScreen = document.getElementById('chapter-list-screen');
+        const storyScreen = document.getElementById('story-screen');
+        const userNameInput = document.getElementById('user-name');
+        const loginButton = document.getElementById('login-button');
+        const chapterListUl = document.getElementById('chapter-list');
+        const storyTitleEl = document.getElementById('story-title');
+        const storyPageContentEl = document.getElementById('story-page-content');
+        const pageIndicatorEl = document.getElementById('page-indicator');
+        const prevPageBtn = document.getElementById('prev-page-btn');
+        const nextPageBtn = document.getElementById('next-page-btn');
+        const homeBtn = document.getElementById('home-btn');
+
+        // Chapters data
+        const chapters = [
+            null, // chapters[0] is null to make indexing 1-based for consistency with prompt format
+            {
+                title: "अजब प्रेम की गज़ब कहानी",
+                pages: [
+                    "पहला पेज: एक गाँव के उत्सव में अजय और प्रिया की पहली मुलाकात हुई। अजय, शहर से आया एक इंजीनियर, गाँव की सादगी और प्रिया की चंचल आँखों पर मोहित हो गया। प्रिया, अपने गाँव की सुंदरता और परंपराओं में पली-बढ़ी, अजय के आत्मविश्वास और उसकी बातों में खो गई। उनके बीच एक अनोखा खिंचाव था, जिसे वे दोनों ही महसूस कर रहे थे। उत्सव की भीड़ में, उनकी आँखें मिलीं और उस पल सब कुछ ठहर सा गया। उन्होंने एक-दूसरे से बातें कीं, हंसे और महसूस किया कि यह सिर्फ एक साधारण मुलाकात नहीं है। गाँव के मेले की रोशनी में, उनके भविष्य की कहानी की नींव रखी जा रही थी। वे घंटों बातें करते रहे, दुनिया और उसके शोर को भूलकर। यह एक शुरुआत थी, एक ऐसी कहानी की जो आगे चलकर कई उतार-चढ़ाव देखेगी, पर हमेशा प्यार और विश्वास पर टिकी रहेगी। अजय ने प्रिया को अपने सपने बताए, और प्रिया ने उसे अपने गाँव के किस्से सुनाए। उनके दिलों में एक-दूसरे के लिए जगह बनती जा रही थी, जिसे वे अब तक पहचान नहीं पाए थे।",
+                    "दूसरा पेज: उनके बीच का रिश्ता धीरे-धीरे गहरा होता गया। अजय अक्सर गाँव आने लगा, सिर्फ प्रिया से मिलने के लिए। प्रिया भी उसके इंतज़ार में रहती। गाँव के लोग उनकी बढ़ती नज़दीकियों पर बातें करने लगे, कुछ ने समर्थन किया तो कुछ ने विरोध। लेकिन अजय और प्रिया को इन बातों से फर्क नहीं पड़ा। उनके प्यार की परीक्षा तब हुई जब अजय को शहर वापस जाना पड़ा और उसे एक बड़े प्रोजेक्ट पर काम करना था। दूरियों ने उनके रिश्ते में एक नई चुनौती पेश की। फोन कॉल और चिट्ठियों के माध्यम से वे जुड़े रहे, पर दूरी का दर्द साफ था। प्रिया को चिंता थी कि कहीं अजय शहर की चकाचौंध में उसे भूल न जाए, और अजय को डर था कि प्रिया के परिवार वाले उनके रिश्ते को स्वीकार न करें। लेकिन उनका प्यार मजबूत था, वे हर चुनौती का सामना करने को तैयार थे। उन्होंने एक-दूसरे को विश्वास दिलाया कि यह दूरी उन्हें और भी करीब लाएगी।",
+                    "तीसरा पेज: कई महीनों की कड़ी मेहनत और सब्र के बाद, अजय वापस गाँव लौटा। इस बार वह खाली हाथ नहीं था, बल्कि उसने प्रिया के पिता से उसका हाथ मांगने का फैसला कर लिया था। प्रिया का परिवार पहले हिचका, गाँव और शहर के बीच के फर्क को लेकर चिंता थी। लेकिन अजय की ईमानदारी और प्रिया के अटल प्यार ने अंततः उनके दिलों को पिघला दिया। गाँव में एक छोटे से समारोह में उनकी शादी हुई, जिसमें पूरा गाँव शामिल हुआ। यह सिर्फ दो लोगों की शादी नहीं थी, बल्कि दो अलग-अलग दुनियाओं का मिलन था। प्रिया ने शहर में अपने आप को ढाला और अजय ने गाँव के मूल्यों को कभी नहीं छोड़ा। उनकी कहानी इस बात का प्रमाण थी कि सच्चा प्यार किसी भी बाधा को पार कर सकता है, चाहे वह गाँव और शहर की दूरी हो या समाज की रूढ़िवादिता। उनका प्यार एक अजब और गजब कहानी बन गया, जिसे लोग आज भी याद करते हैं।"
+                ]
+            },
+            {
+                title: "राज की प्रेम कहानी",
+                pages: [
+                    "पहला पेज: राज, एक सीधा-साधा लड़का था जो दिल्ली के एक छोटे से मोहल्ले में रहता था। उसकी जिंदगी शांत और व्यवस्थित थी, जब तक रिया उसकी दुनिया में नहीं आई। रिया, एक आर्किटेक्ट, अपने प्रोजेक्ट के सिलसिले में राज के पड़ोस में रहने आई थी। उसकी शहरी चकाचौंध और आत्मनिर्भरता ने राज को अपनी ओर आकर्षित किया। राज को पहली नजर में ही उससे प्यार हो गया था। रिया के लिए, राज एक नया अनुभव था - उसकी सादगी, उसका शांत स्वभाव, और उसका अपने मोहल्ले के प्रति गहरा लगाव। वे अक्सर शाम को साथ में टहलते, और राज उसे अपने मोहल्ले की पुरानी कहानियाँ सुनाता। रिया को शहर की भागदौड़ से दूर, राज के साथ एक अलग तरह का सुकून मिलता था। उनके बीच की बातचीत धीरे-धीरे दोस्ती से कुछ और बन रही थी। राज के दोस्त उसे छेड़ते थे कि वह एक 'मॉडर्न लड़की' के चक्कर में पड़ गया है, लेकिन राज को इन बातों से कोई फर्क नहीं पड़ता था।",
+                    "दूसरा पेज: रिया का प्रोजेक्ट खत्म होने वाला था, और उसे वापस मुंबई जाना था। यह बात राज को बेचैन कर रही थी। उसने सोचा भी नहीं था कि वह रिया के बिना रह पाएगा। एक शाम, जब वे एक पुरानी चाय की दुकान पर बैठे थे, राज ने हिम्मत करके अपने दिल की बात कह दी। रिया भी उसे पसंद करती थी, लेकिन उसे डर था कि क्या राज उसके शहरी जीवनशैली को अपना पाएगा, और क्या वह खुद गाँव के शांतिपूर्ण जीवन में ढल पाएगी। उनके बीच कई दिनों तक इस बात पर बहस चलती रही। राज ने उसे समझाया कि प्यार में जगह मायने नहीं रखती, बल्कि साथ होना मायने रखता है। रिया ने भी राज को अपने सपनों और आकांक्षाओं के बारे में बताया। उन्होंने एक-दूसरे की दुनिया को समझने की कोशिश की। यह उनके प्यार का एक महत्वपूर्ण मोड़ था, जहाँ उन्हें यह तय करना था कि क्या उनका रिश्ता भविष्य की चुनौतियों का सामना कर पाएगा।",
+                    "तीसरा पेज: अंततः, रिया ने एक बड़ा फैसला लिया। उसने मुंबई में अपने काम से छुट्टी लेकर राज के साथ दिल्ली में कुछ और महीने बिताने का फैसला किया। इस दौरान उसने राज के मोहल्ले के जीवन को और करीब से देखा, और राज ने उसे शहर के व्यस्त जीवन की बारीकियां समझाईं। उन्होंने पाया कि भले ही उनकी दुनिया अलग थीं, लेकिन उनके मूल्य और भावनाएं एक जैसी थीं। रिया ने राज के साथ रहने का फैसला किया, और उसने दिल्ली में ही एक छोटा सा आर्किटेक्चर स्टूडियो खोला। राज ने भी अपने छोटे व्यवसाय को बढ़ाया। उनके प्यार ने शहर और गाँव के बीच की दूरी को मिटा दिया था। उनकी कहानी यह साबित करती है कि सच्चा प्यार और सादगी किसी भी जटिलता पर भारी पड़ सकते हैं। वे एक-दूसरे की प्रेरणा बन गए, और उनकी प्रेम कहानी उस मोहल्ले में एक मिसाल बन गई।"
+                ]
+            },
+            {
+                title: "अधूरी ख्वाहिशें",
+                pages: [
+                    "पहला पेज: गुड़िया, एक छोटे से गाँव की रहने वाली थी, जहाँ गरीबी और संघर्ष उसकी दिनचर्या का हिस्सा था। उसका सपना था कि वह शहर जाकर अपनी पढ़ाई पूरी करे और अपने परिवार को गरीबी से बाहर निकाले। लेकिन उसके रास्ते में हमेशा आर्थिक तंगी एक बाधा बनकर खड़ी रहती थी। उसके जीवन में प्रकाश तब आया जब उसकी मुलाकात रवि से हुई, जो गाँव के ही एक किसान का बेटा था। रवि गुड़िया की संघर्षशीलता और उसकी आँखों में पलते बड़े सपनों से बहुत प्रभावित था। वह हमेशा उसे प्रोत्साहित करता और हर मुश्किल में उसका सहारा बनता। रवि खुद भी अपने परिवार की स्थिति सुधारना चाहता था, और उसने गुड़िया के सपनों में अपना भविष्य देखा। वे दोनों एक-दूसरे की ताकत बन गए। उन्होंने मिलकर छोटे-मोते काम करना शुरू किया ताकि कुछ पैसे बचा सकें।",
+   "दूसरा पेज: गुड़िया और रवि का प्यार गहरा होता गया, लेकिन उनकी आर्थिक समस्याएँ बढ़ती जा रही थीं। एक दिन, गुड़िया को शहर के एक कॉलेज में स्कॉलरशिप का मौका मिला, लेकिन इसके लिए भी कुछ शुरुआती खर्चों की जरूरत थी जो वे जुटा नहीं पा रहे थे। रवि ने अपनी ज़मीन का एक छोटा सा टुकड़ा गिरवी रखने का फैसला किया, ताकि गुड़िया का सपना पूरा हो सके। गुड़िया यह सुनकर भावुक हो गई, उसने रवि को रोका और कहा कि वह उसके परिवार की संपत्ति को खतरे में नहीं डाल सकती। उनके बीच एक लंबी बातचीत हुई, जहाँ उन्होंने अपने सपनों और प्यार के बीच संतुलन बिठाने की कोशिश की। यह वह क्षण था जब उनके प्यार की सच्ची गहराई सामने आई - वे एक-दूसरे के लिए बड़े से बड़ा त्याग करने को तैयार थे, भले ही इसका मतलब अपनी ख्वाहिशों को अधूरा छोड़ना हो।",
+                    "तीसरा पेज: गुड़िया ने रवि के त्याग को स्वीकार नहीं किया, बल्कि उसने गाँव में ही रहकर छोटे-मोटे काम करना जारी रखा और साथ ही अपनी पढ़ाई भी जारी रखी। रवि ने भी उसे हर कदम पर साथ दिया। उन्होंने मिलकर एक छोटी सी डेयरी शुरू की, और धीरे-धीरे उनकी आर्थिक स्थिति सुधरने लगी। उनका प्यार अधूरा नहीं रहा, बल्कि उसने एक नया रूप ले लिया था - आत्मनिर्भरता और एक-दूसरे के लिए त्याग का। गुड़िया ने कभी शहर जाने का अपना सपना नहीं छोड़ा, बल्कि उसे अपने गाँव में ही पूरा करने का रास्ता ढूंढ लिया। कुछ सालों बाद, उन्होंने शादी कर ली। उनकी कहानी गाँव में एक मिसाल बन गई, यह दर्शाते हुए कि सच्ची प्रेरणा और प्यार किसी भी गरीबी और संघर्ष पर विजय प्राप्त कर सकता है, भले ही रास्ते में कुछ ख्वाहिशें अधूरी रह जाएं, लेकिन उनका प्यार कभी अधूरा नहीं रहा।"
+                ]
+            },
+            {
+                title: "दोस्त की बीवी से 
+                key
+Get API key
+Studio
+Dashboard
+Documentation
+open_in_new
+Monirul Islam
+Chat Prompt
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+ThinkingThoughts
+(experimental)
+Auto
+Expand to view model thoughts
+
+chevron_right
+मुझे माफ़ करना कि Enter की दबाने पर भी अभी तक लॉग इन नहीं हो पा रहा है। यह एक निराशाजनक अनुभव है, लेकिन हम इसे ठीक कर सकते हैं।
+कभी-कभी keypress इवेंट सभी ब्राउज़रों और वर्चुअल कीबोर्ड पर Enter की के लिए एक समान काम नहीं करता है। keydown इवेंट अक्सर ऐसे मामलों में अधिक विश्वसनीय होता है।
+मैंने आपके कोड में एक छोटा सा बदलाव किया है: मैंने keypress इवेंट लिसनर को keydown में बदल दिया है और कुछ और console.log स्टेटमेंट जोड़े हैं ताकि हम देख सकें कि जब आप Enter दबाते हैं तो क्या हो रहा है।
+कृपया अपनी love_story_hindi.html फ़ाइल के पुराने कोड को इस पूरे नए कोड से बदल दें:
+Generated html
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Story Hindi ❤️</title>
+    
+    <!-- Google Fonts: Noto Serif Devanagari -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest Link -->
+    <link rel="manifest" href="./manifest.json">
+    <!-- Apple Mobile Web App Meta Tags (iOS के लिए) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Love Story">
+
+    <!-- AdSense Main Script (load once in head or early body) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-2657289467945272" crossorigin="anonymous"></script>
+
+    <style>
+        /* Basic Reset & Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Noto Serif Devanagari', serif;
+            background-color: #fce4ec; /* Light pink background */
+            color: #4a148c; /* Dark purple text */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top for mobile scroll */
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* App Container */
+        #app-container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 80vh; /* Ensure some height for content */
+            padding-bottom: 20px; /* Space for buttons at the bottom */
+        }
+
+        /* Header */
+        #app-header {
+            background-color: #e91e63; /* Pink header */
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #app-title {
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        #user-display-name {
+            font-size: 1em;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        /* Screen Management */
+        .screen {
+            padding: 20px;
+            flex-grow: 1; /* Allow screens to take available space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically within screen */
+            align-items: center; /* Center content horizontally within screen */
+            text-align: center;
+        }
+
+        .screen.hidden {
+            display: none;
+        }
+
+        #app-header.hidden {
+            display: none;
+        }
+
+        /* Login Screen */
+        #login-screen h2 {
+            color: #e91e63;
+            margin-bottom: 25px;
+            font-size: 1.6em;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #6a1b9a;
+        }
+
+        .input-group input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ffab91; /* Light orange border */
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+            font-family: 'Noto Serif Devanagari', serif;
+            color: #4a148c;
+        }
+
+        button {
+            background-color: #ff5252; /* Red button */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            font-family: 'Noto Serif Devanagari', serif;
+        }
+
+        button:hover {
+            background-color: #e04040;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Chapter List Screen */
+        #chapter-list-screen h2 {
+            color: #e91e63;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+        }
+
+        #chapter-list {
+            list-style: none;
+            padding: 0;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        #chapter-list li {
+            background-color: #ffe0b2; /* Light orange background for list items */
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #chapter-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #chapter-list li a {
+            display: block;
+            padding: 15px;
+            text-decoration: none;
+            color: #6a1b9a;
+            font-weight: 700;
+            font-size: 1.1em;
+            text-align: left;
+        }
+
+        #chapter-list li a:hover {
+            background-color: #ffcc80; /* Slightly darker orange on hover */
+        }
+
+        /* Story Screen */
+        #story-screen {
+            justify-content: flex-start; /* Align content to top for story text */
+        }
+
+        #story-screen h2 {
+            color: #e91e63;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        #story-content-container {
+            background-color: #fff3e0; /* Very light orange for story background */
+            padding: 20px;
+            border-radius: 10px;
+            line-height: 1.8;
+            text-align: justify;
+            max-height: 60vh; /* Limit height for scrollability */
+            overflow-y: auto; /* Enable scrolling for long content */
+            margin-bottom: 20px;
+            color: #4a148c;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        #story-page-content {
+            margin: 0;
+            white-space: pre-wrap; /* Preserves whitespace and line breaks */
+        }
+
+        #page-indicator {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #7b1fa2;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            padding: 10px 0;
+            border-top: 1px solid #ffe0b2;
+        }
+
+        .navigation-buttons .nav-btn {
+            padding: 10px 20px;
+            font-size: 1em;
+            min-width: 100px;
+        }
+
+        /* AdSense Placeholders */
+        .ad-banner-placeholder, .ad-interstitial-placeholder {
+            background-color: #eceff1; /* Light gray */
+            border: 1px dashed #b0bec5; /* Dashed border */
+            padding: 10px;
+            margin: 10px auto;
+            text-align: center;
+            font-size: 0.8em;
+            color: #78909c;
+            width: 90%;
+            max-width: 728px; /* Standard banner width */
+            box-sizing: border-box;
+        }
+
+        .ad-interstitial-placeholder.hidden {
+            display: none;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            #app-container {
+                border-radius: 0;
+                min-height: 100vh;
+                max-width: 100%;
+                box-shadow: none;
+            }
+
+            #app-header {
+                border-radius: 0;
+                padding: 10px 15px;
+            }
+
+            #app-title {
+                font-size: 1.5em;
+            }
+
+            #login-screen h2, #chapter-list-screen h2, #story-screen h2 {
+                font-size: 1.4em;
+            }
+
+            .screen {
+                padding: 15px;
+            }
+
+            .input-group input[type="text"],
+            button {
+                padding: 10px;
+                font-size: 1em;
+            }
+
+            #chapter-list li a {
+                font-size: 1em;
+                padding: 12px;
+            }
+
+            #story-content-container {
+                padding: 15px;
+                max-height: 65vh; /* Adjust for smaller screens */
+            }
+
+            .navigation-buttons .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.9em;
+                min-width: 80px;
+            }
+
+            .ad-banner-placeholder {
+                margin: 5px auto;
+                padding: 8px;
+                max-width: 320px; /* Common mobile banner size */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app-container">
+        <header id="app-header" class="hidden"> <!-- Header hidden initially -->
+            <h1 id="app-title">Love Story Hindi ❤️</h1>
+            <span id="user-display-name"></span>
+        </header>
+
+        <!-- Google AdSense Banner Placeholder -->
+        <div class="ad-banner-placeholder">
+            <p>Google AdSense Banner Ad (Placeholder)</p>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-app-pub-2657289467945272"
+                 data-ad-slot="3123545645"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- Login Screen -->
+        <div id="login-screen" class="screen active">
+            <h2>आपका स्वागत है!</h2>
+            <div class="input-group">
+                <label for="user-name">अपना नाम दर्ज करें:</label>
+                <input type="text" id="user-name" placeholder="आपका नाम">
+            </div>
+            <button id="login-button">शुरू करें</button>
+        </div>
+
+        <!-- Chapter List Screen -->
+        <div id="chapter-list-screen" class="screen hidden">
+            <h2>कहानियों की सूची</h2>
+            <ul id="chapter-list">
+                <!-- Chapters will be loaded here by JavaScript -->
+            </ul>
+        </div>
+
+        <!-- Story Screen -->
+        <div id="story-screen" class="screen hidden">
+            <h2 id="story-title"></h2>
+            <div id="story-content-container">
+                <p id="story-page-content"></p>
+                <p id="page-indicator"></p>
+            </div>
+            <div class="navigation-buttons">
+                <button id="prev-page-btn" class="nav-btn" disabled>पिछला</button>
+                <button id="home-btn" class="nav-btn">मुख्य सूची</button>
+                <button id="next-page-btn" class="nav-btn">अगला</button>
+            </div>
+        </div>
+
+        <!-- Google AdSense Interstitial Placeholder -->
+        <div class="ad-interstitial-placeholder hidden">
+            <p>Google AdSense Interstitial Ad (Placeholder)</p>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-app-pub-2657289467945272"
+                 data-ad-slot="3236625088"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript Code
+        // AdSense related placeholder variables (using provided IDs)
+        const AD_CLIENT_ID = "ca-app-pub-2657289467945272";
+        const BANNER_AD_SLOT = "3123545645";
+        const INTERSTITIAL_AD_SLOT = "3236625088";
+
+        // Global variables
+        let currentChapterIndex = 0;
+        let currentPageIndex = 0;
+        let userName = "";
+
+        // DOM Elements
+        const appHeader = document.getElementById('app-header');
+        const appTitle = document.getElementById('app-title');
+        const userDisplayName = document.getElementById('user-display-name');
+        const loginScreen = document.getElementById('login-screen');
+        const chapterListScreen = document.getElementById('chapter-list-screen');
+        const storyScreen = document.getElementById('story-screen');
+        const userNameInput = document.getElementById('user-name');
+        const loginButton = document.getElementById('login-button');
+        const chapterListUl = document.getElementById('chapter-list');
+        const storyTitleEl = document.getElementById('story-title');
+        const storyPageContentEl = document.getElementById('story-page-content');
+        const pageIndicatorEl = document.getElementById('page-indicator');
+        const prevPageBtn = document.getElementById('prev-page-btn');
+        const nextPageBtn = document.getElementById('next-page-btn');
+        const homeBtn = document.getElementById('home-btn');
+
+        // Chapters data
+        const chapters = [
+            null, // chapters[0] is null to make indexing 1-based for consistency with prompt format
+            {
+                title: "अजब प्रेम की गज़ब कहानी",
+                pages: [
+                    "पहला पेज: एक गाँव के उत्सव में अजय और प्रिया की पहली मुलाकात हुई। अजय, शहर से आया एक इंजीनियर, गाँव की सादगी और प्रिया की चंचल आँखों पर मोहित हो गया। प्रिया, अपने गाँव की सुंदरता और परंपराओं में पली-बढ़ी, अजय के आत्मविश्वास और उसकी बातों में खो गई। उनके बीच एक अनोखा खिंचाव था, जिसे वे दोनों ही महसूस कर रहे थे। उत्सव की भीड़ में, उनकी आँखें मिलीं और उस पल सब कुछ ठहर सा गया। उन्होंने एक-दूसरे से बातें कीं, हंसे और महसूस किया कि यह सिर्फ एक साधारण मुलाकात नहीं है। गाँव के मेले की रोशनी में, उनके भविष्य की कहानी की नींव रखी जा रही थी। वे घंटों बातें करते रहे, दुनिया और उसके शोर को भूलकर। यह एक शुरुआत थी, एक ऐसी कहानी की जो आगे चलकर कई उतार-चढ़ाव देखेगी, पर हमेशा प्यार और विश्वास पर टिकी रहेगी। अजय ने प्रिया को अपने सपने बताए, और प्रिया ने उसे अपने गाँव के किस्से सुनाए। उनके दिलों में एक-दूसरे के लिए जगह बनती जा रही थी, जिसे वे अब तक पहचान नहीं पाए थे।",
+                    "दूसरा पेज: उनके बीच का रिश्ता धीरे-धीरे गहरा होता गया। अजय अक्सर गाँव आने लगा, सिर्फ प्रिया से मिलने के लिए। प्रिया भी उसके इंतज़ार में रहती। गाँव के लोग उनकी बढ़ती नज़दीकियों पर बातें करने लगे, कुछ ने समर्थन किया तो कुछ ने विरोध। लेकिन अजय और प्रिया को इन बातों से फर्क नहीं पड़ा। उनके प्यार की परीक्षा तब हुई जब अजय को शहर वापस जाना पड़ा और उसे एक बड़े प्रोजेक्ट पर काम करना था। दूरियों ने उनके रिश्ते में एक नई चुनौती पेश की। फोन कॉल और चिट्ठियों के माध्यम से वे जुड़े रहे, पर दूरी का दर्द साफ था। प्रिया को चिंता थी कि कहीं अजय शहर की चकाचौंध में उसे भूल न जाए, और अजय को डर था कि प्रिया के परिवार वाले उनके रिश्ते को स्वीकार न करें। लेकिन उनका प्यार मजबूत था, वे हर चुनौती का सामना करने को तैयार थे। उन्होंने एक-दूसरे को विश्वास दिलाया कि यह दूरी उन्हें और भी करीब लाएगी।",
+                    "तीसरा पेज: कई महीनों की कड़ी मेहनत और सब्र के बाद, अजय वापस गाँव लौटा। इस बार वह खाली हाथ नहीं था, बल्कि उसने प्रिया के पिता से उसका हाथ मांगने का फैसला कर लिया था। प्रिया का परिवार पहले हिचका, गाँव और शहर के बीच के फर्क को लेकर चिंता थी। लेकिन अजय की ईमानदारी और प्रिया के अटल प्यार ने अंततः उनके दिलों को पिघला दिया। गाँव में एक छोटे से समारोह में उनकी शादी हुई, जिसमें पूरा गाँव शामिल हुआ। यह सिर्फ दो लोगों की शादी नहीं थी, बल्कि दो अलग-अलग दुनियाओं का मिलन था। प्रिया ने शहर में अपने आप को ढाला और अजय ने गाँव के मूल्यों को कभी नहीं छोड़ा। उनकी कहानी इस बात का प्रमाण थी कि सच्चा प्यार किसी भी बाधा को पार कर सकता है, चाहे वह गाँव और शहर की दूरी हो या समाज की रूढ़िवादिता। उनका प्यार एक अजब और गजब कहानी बन गया, जिसे लोग आज भी याद करते हैं।"
+                ]
+            },
+            {
+                title: "राज की प्रेम कहानी",
+                pages: [
+                    "पहला पेज: राज, एक सीधा-साधा लड़का था जो दिल्ली के एक छोटे से मोहल्ले में रहता था। उसकी जिंदगी शांत और व्यवस्थित थी, जब तक रिया उसकी दुनिया में नहीं आई। रिया, एक आर्किटेक्ट, अपने प्रोजेक्ट के सिलसिले में राज के पड़ोस में रहने आई थी। उसकी शहरी चकाचौंध और आत्मनिर्भरता ने राज को अपनी ओर आकर्षित किया। राज को पहली नजर में ही उससे प्यार हो गया था। रिया के लिए, राज एक नया अनुभव था - उसकी सादगी, उसका शांत स्वभाव, और उसका अपने मोहल्ले के प्रति गहरा लगाव। वे अक्सर शाम को साथ में टहलते, और राज उसे अपने मोहल्ले की पुरानी कहानियाँ सुनाता। रिया को शहर की भागदौड़ से दूर, राज के साथ एक अलग तरह का सुकून मिलता था। उनके बीच की बातचीत धीरे-धीरे दोस्ती से कुछ और बन रही थी। राज के दोस्त उसे छेड़ते थे कि वह एक 'मॉडर्न लड़की' के चक्कर में पड़ गया है, लेकिन राज को इन बातों से कोई फर्क नहीं पड़ता था।",
+                    "दूसरा पेज: रिया का प्रोजेक्ट खत्म होने वाला था, और उसे वापस मुंबई जाना था। यह बात राज को बेचैन कर रही थी। उसने सोचा भी नहीं था कि वह रिया के बिना रह पाएगा। एक शाम, जब वे एक पुरानी चाय की दुकान पर बैठे थे, राज ने हिम्मत करके अपने दिल की बात कह दी। रिया भी उसे पसंद करती थी, लेकिन उसे डर था कि क्या राज उसके शहरी जीवनशैली को अपना पाएगा, और क्या वह खुद गाँव के शांतिपूर्ण जीवन में ढल पाएगी। उनके बीच कई दिनों तक इस बात पर बहस चलती रही। राज ने उसे समझाया कि प्यार में जगह मायने नहीं रखती, बल्कि साथ होना मायने रखता है। रिया ने भी राज को अपने सपनों और आकांक्षाओं के बारे में बताया। उन्होंने एक-दूसरे की दुनिया को समझने की कोशिश की। यह उनके प्यार का एक महत्वपूर्ण मोड़ था, जहाँ उन्हें यह तय करना था कि क्या उनका रिश्ता भविष्य की चुनौतियों का सामना कर पाएगा।",
+                    "तीसरा पेज: अंततः, रिया ने एक बड़ा फैसला लिया। उसने मुंबई में अपने काम से छुट्टी लेकर राज के साथ दिल्ली में कुछ और महीने बिताने का फैसला किया। इस दौरान उसने राज के मोहल्ले के जीवन को और करीब से देखा, और राज ने उसे शहर के व्यस्त जीवन की बारीकियां समझाईं। उन्होंने पाया कि भले ही उनकी दुनिया अलग थीं, लेकिन उनके मूल्य और भावनाएं एक जैसी थीं। रिया ने राज के साथ रहने का फैसला किया, और उसने दिल्ली में ही एक छोटा सा आर्किटेक्चर स्टूडियो खोला। राज ने भी अपने छोटे व्यवसाय को बढ़ाया। उनके प्यार ने शहर और गाँव के बीच की दूरी को मिटा दिया था। उनकी कहानी यह साबित करती है कि सच्चा प्यार और सादगी किसी भी जटिलता पर भारी पड़ सकते हैं। वे एक-दूसरे की प्रेरणा बन गए, और उनकी प्रेम कहानी उस मोहल्ले में एक मिसाल बन गई।"
+                ]
+            },
+            {
+              title: "अधूरी ख्वाहिशें",
+                pages: [
+                    "पहला पेज: गुड़िया, एक छोटे से गाँव की रहने वाली थी, जहाँ गरीबी और संघर्ष उसकी दिनचर्या का हिस्सा था। उसका सपना था कि वह शहर जाकर अपनी पढ़ाई पूरी करे और अपने परिवार को गरीबी से बाहर निकाले। लेकिन उसके रास्ते में हमेशा आर्थिक तंगी एक बाधा बनकर खड़ी रहती थी। उसके जीवन में प्रकाश तब आया जब उसकी मुलाकात रवि से हुई, जो गाँव के ही एक किसान का बेटा था। रवि गुड़िया की संघर्षशीलता और उसकी आँखों में पलते बड़े सपनों से बहुत प्रभावित था। वह हमेशा उसे प्रोत्साहित करता और हर मुश्किल में उसका सहारा बनता। रवि खुद भी अपने परिवार की स्थिति सुधारना चाहता था, और उसने गुड़िया के सपनों में अपना भविष्य देखा। वे दोनों एक-दूसरे की ताकत बन गए। उन्होंने मिलकर छोटे-मोते काम करना शुरू किया ताकि कुछ पैसे बचा सकें।",
+                    "दूसरा पेज: गुड़िया और रवि का प्यार गहरा होता गया, लेकिन उनकी आर्थिक समस्याएँ बढ़ती जा रही थीं। एक दिन, गुड़िया को शहर के एक कॉलेज में स्कॉलरशिप का मौका मिला, लेकिन इसके लिए भी कुछ शुरुआती खर्चों की जरूरत थी जो वे जुटा नहीं पा रहे थे। रवि ने अपनी ज़मीन का एक छोटा सा टुकड़ा गिरवी रखने का फैसला किया, ताकि गुड़िया का सपना पूरा हो सके। गुड़िया यह सुनकर भावुक हो गई, उसने रवि को रोका और कहा कि वह उसके परिवार की संपत्ति को खतरे में नहीं डाल सकती। उनके बीच एक लंबी बातचीत हुई, जहाँ उन्होंने अपने सपनों और प्यार के बीच संतुलन बिठाने की कोशिश की। यह वह क्षण था जब उनके प्यार की सच्ची गहराई सामने आई - वे एक-दूसरे के लिए बड़े से बड़ा त्याग करने को तैयार थे, भले ही इसका मतलब अपनी ख्वाहिशों को अधूरा छोड़ना हो।",
+                    "तीसरा पेज: गुड़िया ने रवि के त्याग को स्वीकार नहीं किया, बल्कि उसने गाँव में ही रहकर छोटे-मोटे काम करना जारी रखा और साथ ही अपनी पढ़ाई भी जारी रखी। रवि ने भी उसे हर कदम पर साथ दिया। उन्होंने मिलकर एक छोटी सी डेयरी शुरू की, और धीरे-धीरे उनकी आर्थिक स्थिति सुधरने लगी। उनका प्यार अधूरा नहीं रहा, बल्कि उसने एक नया रूप ले लिया था - आत्मनिर्भरता और एक-दूसरे के लिए त्याग का। गुड़िया ने कभी शहर जाने का अपना सपना नहीं छोड़ा, बल्कि उसे अपने गाँव में ही पूरा करने का रास्ता ढूंढ लिया। कुछ सालों बाद, उन्होंने शादी कर ली। उनकी कहानी गाँव में एक मिसाल बन गई, यह दर्शाते हुए कि सच्ची प्रेरणा और प्यार किसी भी गरीबी और संघर्ष पर विजय प्राप्त कर सकता है, भले ही रास्ते में कुछ ख्वाहिशें अधूरी रह जाएं, लेकिन उनका प्यार कभी अधूरा नहीं रहा।"
+                ]
+            },
+            {
+              title: "दोस्त की बीवी से अफेयर",
+                pages: [
+                    "पहला पेज: अमित और राहुल बचपन के दोस्त थे, उनकी दोस्ती की कसमें खाते थे। अमित की शादी प्रिया से हुई थी, और राहुल अक्सर उनके घर आता-जाता रहता था। समय के साथ, राहुल और प्रिया के बीच एक अजीब सी दोस्ती पनपने लगी। वे घंटों बातें करते, हँसते, और एक-दूसरे के साथ समय बिताना पसंद करते। अमित अपने काम में व्यस्त रहता था और अक्सर देर रात तक घर लौटता था, जिसके कारण प्रिया अकेला महसूस करती थी। राहुल ने अनजाने में उस खालीपन को भरना शुरू कर दिया। प्रिया ने राहुल में एक ऐसा दोस्त पाया जो उसे समझता था, सुनता था, और उसकी भावनाओं को महत्व देता था। राहुल भी प्रिया की सादगी और उसके विचारों से प्रभावित था। उन्होंने कभी सोचा भी नहीं था कि उनकी यह दोस्ती एक अलग मोड़ ले लेगी। उनके बीच की सीमाएं धीरे-धीरे धुंधली होने लगीं।",
+                    "दूसरा पेज: एक शाम, जब अमित शहर से बाहर था, राहुल और प्रिया एक फिल्म देख रहे थे। माहौल थोड़ा भावुक था, और अनजाने में उनके हाथ एक-दूसरे को छू गए। उस पल उन्हें एहसास हुआ कि यह सिर्फ दोस्ती नहीं है। उनके दिल तेजी से धड़कने लगे। उन्होंने कई दिनों तक इस एहसास को दबाने की कोशिश की, लेकिन यह असंभव होता जा रहा था। राहुल को अपने दोस्त अमित का ख्याल आता, और प्रिया को अपने वैवाहिक जीवन का। वे दोनों ही इस स्थिति से असहज थे, लेकिन एक-दूसरे के प्रति बढ़ता आकर्षण उन्हें रोक नहीं पा रहा था। उनकी मुलाकातों में अब एक अजीब सी चुप्पी रहने लगी थी, जिसमें अनकहे अहसास भरे थे। यह एक संवेदनशील और कठिन दौर था, जहाँ उन्हें अपने रिश्तों और भावनाओं के बीच एक चुनाव करना था। उनका नैतिक दुविधा उन्हें अंदर से खाए जा रही थी।",
+
+                        "तीसरा पेज: एक रात, अमित के लौटने से पहले, राहुल ने प्रिया से मुलाकात की। उसने प्रिया से कहा कि वे गलत रास्ते पर जा रहे हैं और उन्हें यह सब यहीं खत्म करना होगा। प्रिया भी इस बात से सहमत थी, क्योंकि वह अपने दोस्त और पति के साथ धोखा नहीं कर सकती थी। यह उनके लिए एक मुश्किल फैसला था, लेकिन उन्होंने अपनी भावनाओं को नियंत्रित करने और सही रास्ता चुनने का निर्णय लिया। राहुल ने अमित के घर आना कम कर दिया और धीरे-धीरे अपनी और प्रिया की दोस्ती को एक सम्मानजनक दूरी पर रखा। प्रिया ने अमित के साथ अपने रिश्ते पर ध्यान दिया और अपनी समस्याओं पर बात की। यह कहानी सिर्फ एक अफेयर की नहीं थी, बल्कि यह दोस्ती, नैतिक दुविधा, और कठिन फैसलों की कहानी थी। कभी-कभी प्यार गलत समय पर या गलत व्यक्ति के साथ हो सकता है, लेकिन सबसे महत्वपूर्ण होता है सही रास्ते पर चलना और रिश्तों का सम्मान करना।"
+                ]
+            },
+            {
+              title: "मुंबई की राजकुमारी और डिटेक्टिव",
+                pages: [
+                    "पहला पेज: मुंबई की चकाचौंध में रहने वाली, आलीशान जीवन जीने वाली रिया, एक प्रसिद्ध उद्योगपति की बेटी थी। लोग उसे 'मुंबई की राजकुमारी' कहते थे। उसकी दुनिया तब हिल गई जब उसके पिता पर एक गंभीर वित्तीय अपराध का आरोप लगा। इस मामले की जाँच के लिए एक युवा और तेजतर्रार डिटेक्टिव, करण को नियुक्त किया गया। करण अपनी ईमानदारी और काम के प्रति समर्पण के लिए जाना जाता था। रिया को शुरुआत में करण बिल्कुल पसंद नहीं आया, उसे लगा कि वह उसके परिवार को बदनाम कर रहा है। लेकिन जैसे-जैसे करण ने मामले की तह तक जाना शुरू किया, रिया को उसके काम के प्रति गंभीरता और निष्पक्षता पर भरोसा होने लगा। करण को भी रिया की कमजोरियों और उसकी सच्ची, ईमानदार भावनाओं का पता चला, जो उसकी बाहरी शान-शौकत के पीछे छिपी थी।",
+                    "दूसरा पेज: करण और रिया ने मिलकर सबूत जुटाना शुरू किया। इस प्रक्रिया में, वे एक-दूसरे के करीब आए। रिया ने करण को अपने पिता के व्यापारिक प्रतिद्वंद्वियों के बारे में बताया, और करण ने उसे कानून और अपराध की जटिलताओं से अवगत कराया। उनकी रातें एक साथ दस्तावेजों की जाँच करते हुए और सुराग ढूंढते हुए बीतने लगीं। धीरे-धीरे, उनके बीच एक गहरा रिश्ता पनपने लगा, जो सिर्फ काम तक सीमित नहीं था। उन्हें एक-दूसरे पर भरोसा होने लगा था, जो किसी भी रिश्ते की सबसे मजबूत नींव होती है। लेकिन उनका रास्ता आसान नहीं था। अपराधियों ने उन्हें डराने और रोकने की कोशिश की। उनके प्यार की परीक्षा तब हुई जब उन्हें एक ऐसी स्थिति का सामना करना पड़ा जहाँ उनके विश्वास को चुनौती दी गई। करण को रिया के पिता पर संदेह करने के लिए मजबूर किया गया, और रिया को करण के इरादों पर शक हुआ।",
+                    "तीसरा पेज: कई खतरों और मुश्किलों का सामना करने के बाद, करण ने आखिरकार असली अपराधी को पकड़ लिया और रिया के पिता को बेगुनाह साबित किया। रिया के परिवार की प्रतिष्ठा वापस आ गई। इस पूरे सफर में, करण और रिया का रिश्ता और भी मजबूत हो गया था। रिया ने अपनी 'राजकुमारी' की छवि छोड़कर एक आत्मनिर्भर और मजबूत महिला के रूप में खुद को पाया। करण ने भी अपने सख्त डिटेक्टिव के रूप में अपनी भावनाओं को व्यक्त करना सीखा। उनकी कहानी एक रोमांचक अपराध की जाँच से शुरू हुई, लेकिन वह विश्वास और प्यार की एक अटूट मिसाल बन गई। उन्होंने साबित कर दिया कि सबसे अप्रत्याशित परिस्थितियों में भी सच्चा प्यार पनप सकता है और हर मुश्किल का सामना कर सकता है।"
+                ]
+            },
+            {
+              title: "प्रेमी का धोखा: अनकही गर्भावस्था",
+                pages: [
+                    "पहला पेज: मीरा, एक मेहनती और आशावादी लड़की थी, जिसे अपने कॉलेज के दिनों में अर्जुन से प्यार हो गया था। अर्जुन, एक आकर्षक और महत्वाकांक्षी लड़का था, जिसने मीरा को बड़े सपने दिखाए। उनका प्यार गहरा होता गया और वे एक-दूसरे के साथ जीवन बिताने का सपना देखने लगे। मीरा ने अर्जुन पर पूरा भरोसा किया और उसके हर फैसले में साथ दिया। लेकिन उनके रिश्ते में एक अप्रत्याशित मोड़ तब आया जब मीरा को पता चला कि वह गर्भवती है। उसने यह खुशखबरी अर्जुन को दी, उम्मीद थी कि वह भी खुश होगा और उनका भविष्य और भी उज्जवल होगा। लेकिन अर्जुन की प्रतिक्रिया मीरा की उम्मीदों से बिल्कुल अलग थी। वह घबरा गया और उसने इस जिम्मेदारी से भागने का फैसला किया।",
+                    "दूसरा पेज: अर्जुन ने मीरा से दूरी बनाना शुरू कर दिया, उसके फोन उठाना बंद कर दिए और अंततः उसे पूरी तरह से छोड़ दिया। मीरा टूट गई थी। उसे समझ नहीं आ रहा था कि वह अकेली इस स्थिति का सामना कैसे करेगी। समाज का डर, परिवार की चिंता और अकेलेपन का दर्द उसे अंदर से खाए जा रहा था। उसने एक पल के लिए सब कुछ खत्म करने की भी सोची, लेकिन उसके अंदर के मातृत्व ने उसे मजबूत बनाया। उसने फैसला किया कि वह अपने बच्चे को अकेले पालेगी और अपने जीवन को फिर से पटरी पर लाएगी। यह एक मुश्किल यात्रा थी, लेकिन मीरा ने हार नहीं मानी। उसने अपने माता-पिता को बताया, जो पहले तो हैरान थे, लेकिन बाद में उन्होंने अपनी बेटी का पूरा साथ दिया। मीरा ने एक नया काम ढूंढा और अपनी आत्मनिर्भरता की राह पर चल पड़ी।",
+                    "तीसरा पेज: मीरा ने अपने बच्चे को जन्म दिया और अपनी सारी ऊर्जा उसे पालने में लगा दी। उसने अपनी पढ़ाई पूरी की और एक अच्छी नौकरी हासिल की। उसका बच्चा उसके लिए सबसे बड़ी प्रेरणा बन गया। कई सालों बाद, अर्जुन वापस आया और उसने मीरा से माफी मांगी। वह अपनी गलती पर पछता रहा था और अपने बच्चे से मिलना चाहता था। मीरा ने उसे माफ कर दिया, लेकिन उसे स्वीकार नहीं किया। उसने अर्जुन से कहा कि उसने अपने बच्चे को अकेले पाला है और उसे अब किसी की जरूरत नहीं है। यह उसकी आत्मनिर्भरता की जीत थी। यह कहानी सिर्फ एक धोखे और अनकही गर्भावस्था की नहीं थी, बल्कि यह एक लड़की की हिम्मत, दृढ़ संकल्प और अपने दम पर खड़े होने की कहानी थी। मीरा ने साबित कर दिया कि एक महिला अपनी जिंदगी की मुश्किल से मुश्किल लड़ाई भी अकेले जीत सकती है और एक बेहतर भविष्य बना सकती है।"
+                ]
+            },
+            {
+              title: "एक अमर प्रेम कथा",
+                pages: [
+                    "पहला पेज: रिया, एक प्रतिभाशाली चित्रकार थी, जिसकी कला में गहरा दर्द और खूबसूरती झलकती थी। करण, एक मशहूर संगीतकार, जो अपनी धुनों से दिलों को छू लेता था। उनकी मुलाकात एक आर्ट गैलरी में हुई, जहाँ करण रिया की एक पेंटिंग देखकर मंत्रमुग्ध हो गया। उस पेंटिंग में एक ऐसी उदासी थी, जो करण के संगीत से मेल खाती थी। उन्होंने बातें करना शुरू किया, और जल्दी ही उन्हें महसूस हुआ कि उनकी आत्माएं संगीत और चित्रकला के माध्यम से एक-दूसरे से जुड़ी हुई हैं। रिया करण के संगीत में अपनी भावनाओं को पाती थी, और करण रिया की कला में अपनी प्रेरणा। वे अक्सर देर रात तक साथ बैठकर अपनी कला और जीवन के बारे में बातें करते। उनका प्यार सिर्फ शारीरिक नहीं था, बल्कि आध्यात्मिक था, जो उनकी रचनात्मकता से पोषित होता था।",
+                    "दूसरा पेज: उनका प्यार समय और स्थान से परे था। रिया की एक रहस्यमय बीमारी का पता चला, जिसने उसकी आँखों की रोशनी धीरे-धीरे छीननी शुरू कर दी। यह सुनकर करण टूट गया, लेकिन उसने रिया का हाथ नहीं छोड़ा। उसने रिया के लिए संगीत बनाना शुरू किया, जो उसकी आँखों की रोशनी जाने के बाद उसकी दुनिया बन गया। रिया ने भी अपनी आँखों की रोशनी कम होने के बावजूद चित्रकला जारी रखी, करण के संगीत को सुनकर वह अपनी भावनाओं को कैनवास पर उतारती थी। उनकी बीमारी ने उन्हें और भी करीब ला दिया। उनके प्यार की परीक्षा हुई, लेकिन उन्होंने हार नहीं मानी। उन्होंने एक-दूसरे को सहारा दिया और अपनी कला के माध्यम से अपनी भावनाओं को व्यक्त करते रहे। दुनिया ने उनके प्यार और उनके संघर्ष को देखा, और उनकी कहानी एक अमर प्रेम कथा बन गई, जो दूसरों को प्रेरणा देती थी।",
+                    "तीसरा पेज: रिया की आँखों की रोशनी पूरी तरह से चली गई, लेकिन उसने कभी हार नहीं मानी। करण हमेशा उसके साथ रहा, उसके लिए दुनिया का सबसे सुंदर संगीत बनाता रहा। रिया ने अंधेरे में भी सबसे सुंदर पेंटिंग बनाई, जिसे वह करण के मार्गदर्शन से करती थी। उनकी प्रेम कहानी ने साबित कर दिया कि सच्चा प्यार किसी भी शारीरिक बाधा से परे होता है। वे एक-दूसरे की आत्मा के साथी बन गए। कई सालों बाद, रिया शांत भाव से इस दुनिया से विदा हो गई, लेकिन उसका संगीत और उसकी कला करण के अंदर हमेशा जीवित रही। करण ने रिया की याद में कई अमर धुनें बनाईं, जो आज भी लोगों के दिलों को छू जाती हैं। उनकी कहानी एक सच्ची अमर प्रेम कथा बन गई, जो बताती है कि प्यार कभी मरता नहीं, यह बस एक रूप से दूसरे रूप में बदल जाता है, और समय से परे रहता है।"
+                ]
+            },
+            {
+              title: "कॉफ़ी विद काजल",
+                pages: [
+                    "पहला पेज: राहुल अपने गृहनगर लौटा था, कई सालों बाद। उसे शहर की सड़कों पर चलते हुए पुरानी यादें ताजा हो रही थीं। एक शाम, वह अपनी पुरानी पसंदीदा कॉफ़ी शॉप में गया, जहाँ उसकी मुलाकात काजल से हुई। काजल, उसकी कॉलेज की दोस्त थी, जिससे वह सालों पहले एक गलतफहमी के कारण अलग हो गया था। दोनों एक-दूसरे को देखकर हैरान रह गए। पहले तो उनके बीच अजीब सी चुप्पी थी, फिर उन्होंने धीरे-धीरे बातें करना शुरू किया। कॉफ़ी की सुगंध और पुरानी यादें माहौल में घुलने लगीं। उन्होंने अपने कॉलेज के दिनों की बातें कीं, अपनी हँसी-मजाक को याद किया, और उस गलतफहमी पर भी चर्चा की जिसने उन्हें अलग किया था। यह मुलाकात सिर्फ एक इत्तेफाक नहीं थी, बल्कि नियति का इशारा था।",
+                    "दूसरा पेज: राहुल और काजल ने रोज उस कॉफ़ी शॉप में मिलना शुरू किया। हर मुलाकात के साथ, उनके बीच की दूरियां कम होती गईं और उनका पुराना प्यार फिर से खिलने लगा। उन्होंने पाया कि समय और दूरी के बावजूद, उनके दिल में एक-दूसरे के लिए वही जगह थी। राहुल ने काजल को अपनी जिंदगी के उतार-चढ़ाव बताए, और काजल ने भी अपनी कहानियाँ साझा कीं। उन्होंने एक-दूसरे को समझा, माफ किया, और एक नए सिरे से अपने रिश्ते को मजबूत बनाने का फैसला किया। लेकिन उनके रास्ते में एक चुनौती थी - राहुल का शहर में वापस जाना। उसे अपने काम के सिलसिले में वापस लौटना था। क्या यह फिर से उनके बीच दूरी पैदा कर देगा? उन्हें इस बात पर फैसला करना था कि क्या वे इस बार इस दूरी को अपने प्यार के आड़े नहीं आने देंगे।",
+                    "तीसरा पेज: राहुल ने अपने काम को गृहनगर में स्थानांतरित करने का फैसला किया, ताकि वह काजल के साथ रह सके। काजल भी इस बात से बहुत खुश थी। उन्होंने अपनी गलतफहमी को पूरी तरह से दूर किया और एक-दूसरे के साथ जीवन बिताने का फैसला किया। उस कॉफ़ी शॉप ने उनके प्यार को फिर से जोड़ दिया था। उन्होंने शादी कर ली और एक नया जीवन शुरू किया, जिसमें पुरानी गलतियों को दोहराने की कोई गुंजाइश नहीं थी। उनकी कहानी यह बताती है कि कभी-कभी, पुरानी यादें और एक मौका मिलने पर प्यार फिर से खिल सकता है। कॉफ़ी शॉप सिर्फ एक जगह नहीं थी, बल्कि वह उनकी प्रेम कहानी का एक महत्वपूर्ण हिस्सा बन गई थी। यह एक खूबसूरत मिसाल थी कि कैसे एक कप कॉफ़ी और कुछ बातें दो दिलों को सालों बाद भी फिर से जोड़ सकती हैं।"
+                ]
+            },
+            {
+              title: "लव लेटर जो कभी मिला नहीं",
+                pages: [
+                    "पहला पेज: रवि और नैना स्कूल के दिनों से एक-दूसरे से प्यार करते थे, लेकिन दोनों में से किसी ने भी कभी अपने प्यार का इजहार नहीं किया। रवि ने नैना के लिए एक लव लेटर लिखा, जिसमें उसने अपने दिल की सारी बातें लिख दी थीं - उसके प्रति उसका गहरा प्यार, उसके साथ भविष्य के सपने। उसने वह लेटर नैना की किताब में रख दिया था, उम्मीद थी कि वह उसे मिल जाएगा। लेकिन नियति को कुछ और ही मंजूर था। उसी दिन, नैना के परिवार को अचानक दूसरे शहर शिफ्ट होना पड़ा, और वह जल्दीबाजी में निकल गई। लेटर वहीं किताब में रह गया, जो कभी नैना तक नहीं पहुँचा। रवि ने नैना को ढूंढने की बहुत कोशिश की, लेकिन कोई फायदा नहीं हुआ। दोनों अलग हो गए, अपने प्यार के अनकहे रहस्यों के साथ।",
+                    "दूसरा पेज: कई सालों बाद, रवि एक पुरानी किताबों की दुकान में गया और उसे गलती से वही किताब मिल गई जिसमें उसने नैना के लिए लेटर रखा था। उसके दिल की धड़कन बढ़ गई। उसने किताब खोली और लेटर को फिर से पढ़ा, पुरानी यादें ताजा हो गईं। उसी समय, नैना भी अपने पुराने स्कूल के पास से गुजर रही थी और उसी दुकान में आ गई, शायद अपनी पुरानी यादों को ताजा करने। उनकी आँखें मिलीं। पहले तो उन्होंने एक-दूसरे को पहचाना नहीं, लेकिन फिर पुरानी पहचान के निशान साफ हो गए। रवि के हाथ में वह लव लेटर था, जो उनके अनकहे प्यार का सबूत था। नैना ने उसे देखा और उसकी आँखों में आँसू आ गए। उन्होंने वर्षों से दबाई हुई अपनी भावनाओं को व्यक्त किया। वह लेटर जो कभी नैना तक नहीं पहुँचा था, आज उनकी मुलाकात का जरिया बन गया था।",
+                    "तीसरा पेज: उस लव लेटर ने उन दोनों के बीच की सालों पुरानी खाई को पाट दिया। उन्होंने कई घंटों तक बातें कीं, अपने अलग-अलग जीवन की कहानियाँ साझा कीं, और उस अधूरे प्यार के बारे में बात की। रवि ने नैना को बताया कि वह आज भी उसे कितना प्यार करता है, और नैना ने स्वीकार किया कि वह भी रवि को कभी भूल नहीं पाई। उन्होंने महसूस किया कि नियति ने उन्हें एक और मौका दिया है। उन्होंने अपने जीवन की नई शुरुआत की, जिसमें अब कोई अनकहा प्यार नहीं था। लव लेटर जो कभी नैना को नहीं मिला था, वह अंततः उनके दो दिलों को फिर से जोड़ने का माध्यम बन गया। यह कहानी इस बात का प्रमाण है कि सच्चा प्यार कभी खत्म नहीं होता, वह बस सही समय का इंतजार करता है, और कभी-कभी एक पुरानी चिट्ठी दो आत्माओं को फिर से मिला सकती है।"
+                ]
+            },
+            {
+              title: "सावन का पहला प्यार",
+                pages: [
+                    "पहला पेज: मानसी और आदित्य एक ही गाँव में रहते थे। उनकी दोस्ती बचपन से ही थी, वे साथ खेलते, साथ स्कूल जाते। सावन का महीना उनका पसंदीदा था, जब पहली बारिश होती थी और गाँव का माहौल खुशनुमा हो जाता था। उसी सावन में, जब पहली बूंदें गिरीं, मानसी और आदित्य ने एक-दूसरे को एक नई नज़र से देखा। उनकी दोस्ती धीरे-धीरे प्यार में बदलने लगी थी। आदित्य मानसी के लिए पकौड़े लाता, और मानसी उसके लिए ताजे फूल चुनती। वे घंटों खेतों में बैठकर बातें करते, बारिश की बूँदों को अपने चेहरे पर महसूस करते। यह उनका पहला प्यार था, जो सावन की खुशबू में और भी महक उठा था। गाँव के लोग उनकी मासूम मोहब्बत को देखकर मुस्कुराते थे।",
+                    "दूसरा पेज: उनका प्यार बढ़ता गया, और उन्होंने एक-दूसरे से सच्चे वादे किए - हमेशा साथ रहने के वादे, हर सुख-दुख में एक-दूसरे का सहारा बनने के वादे। लेकिन गाँव में अक्सर एक परंपरा थी कि लड़कियाँ शादी के बाद दूसरे गाँव चली जाती थीं। मानसी को इस बात का डर था कि कहीं उसे आदित्य से दूर न जाना पड़े। आदित्य ने उसे विश्वास दिलाया कि वह ऐसा कुछ नहीं होने देगा, वह मानसी के परिवार से बात करेगा और उसे अपने साथ ही रखेगा। उनके प्यार की परीक्षा तब हुई जब मानसी के लिए दूसरे गाँव से शादी का प्रस्ताव आया। मानसी के माता-पिता मान गए थे, क्योंकि वह एक अच्छा परिवार था। मानसी और आदित्य दोनों बेचैन थे, उन्हें समझ नहीं आ रहा था कि वे इस स्थिति का सामना कैसे करेंगे।",
+                    "तीसरा पेज: आदित्य ने हिम्मत जुटाई और मानसी के पिता से बात की। उसने मानसी के प्रति अपने सच्चे प्यार और अपने वादों के बारे में बताया। शुरुआत में मानसी के पिता नाराज हुए, लेकिन आदित्य की ईमानदारी और उसके अटल प्यार को देखकर उनका दिल पिघल गया। उन्होंने मानसी और आदित्य की शादी को स्वीकार कर लिया। गाँव में उनकी शादी बड़े धूमधाम से हुई, ठीक सावन के महीने में, जब पहली बारिश फिर से हो रही थी। उनकी कहानी यह बताती है कि सच्चा प्यार और बचपन की मोहब्बत सबसे मजबूत होती है, और सच्चे वादे हमेशा पूरे होते हैं। सावन का पहला प्यार उनकी जिंदगी का सबसे खूबसूरत अध्याय बन गया, और वे हमेशा एक-दूसरे के साथ रहे, अपने गाँव की मिट्टी और बारिश की बूंदों के बीच।"
+                ]
+            }
+        ];
+      // Event Listeners
+        console.log("Adding event listeners...");
+        if (loginButton) {
+            loginButton.addEventListener('click', login);
+            console.log("Login button listener added.");
+        } else {
+            console.error("Error: loginButton element not found!");
+        }
+        
+        // --- यहाँ बदलाव किया गया है: 'keypress' को 'keydown' में बदला गया और अधिक लॉगिंग जोड़ी गई है ---
+        if (userNameInput) {
+            userNameInput.addEventListener('keydown', function(event) {
+                console.log("Key pressed:", event.key, "Code:", event.code); // लॉग करें कौन सी की दब रही है
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Default form submission (if any) को रोकें
+                    console.log("Enter key detected, calling login().");
+                    login(); // login function को कॉल करें
+                }
+            });
+        } else {
+            console.error("Error: userNameInput element not found!");
+        }
+        // --- बदलाव यहाँ समाप्त होता है ---
+
+        if (nextPageBtn) {
+          nextPageBtn.addEventListener('click', nextPage);
+            console.log("Next page button listener added.");
+        } else {
+             console.error("Error: nextPageBtn element not found!");
+        }
+        if (prevPageBtn) {
+            prevPageBtn.addEventListener('click', prevPage);
+            console.log("Previous page button listener added.");
+        } else {
+            console.error("Error: prevPageBtn element not found!");
+        }
+        if (homeBtn) {
+            homeBtn.addEventListener('click', goHome);
+            console.log("Home button listener added.");
+        } else {
+            console.error("Error: homeBtn element not found!");
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', initApp);
+        console.log("DOMContentLoaded listener added.");
+
+        function initApp() {
+            console.log("initApp function called.");
+            const storedUserName = localStorage.getItem('userName');
+            if (storedUserName) {
+                userName = storedUserName;
+                if (userDisplayName) userDisplayName.textContent = `नमस्ते, ${userName}`;
+                showScreen('chapter-list-screen');
+                loadChapterList();
+                console.log(`User ${userName} logged in from localStorage.`);
+            } else {
+                showScreen('login-screen');
+                if (userDisplayName) userDisplayName.textContent = '';
+                console.log("Showing login screen.");
+            }
+        }
+
+        function showScreen(screenId) {
+            console.log(`Attempting to show screen: ${screenId}`);
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => screen.classList.add('hidden'));
+            
+            const targetScreen = document.getElementById(screenId);
+            if (targetScreen) {
+                targetScreen.classList.remove('hidden');
+            } else {
+                console.error(`Error: Screen with ID ${screenId} not found!`);
+            }
+
+            if (appHeader) {
+                if (screenId === 'login-screen') {
+                    appHeader.classList.add('hidden');
+                    console.log("Header hidden.");
+                } else {
+                    appHeader.classList.remove('hidden');
+                    console.log("Header visible.");
+                }
+            } else {
+                console.error("Error: appHeader element not found!");
+            }
+        }
+
+        function login() {
+            console.log("Login button clicked, login function called.");
+            if (!userNameInput) {
+                console.error("Error: userNameInput element not found!");
+                return;
+            }
+            const name = userNameInput.value.trim();
+            console.log("User name input:", name);
+
+            if (name) {
+                userName = name;
+                localStorage.setItem('userName', userName);
+                if (userDisplayName) userDisplayName.textContent = `नमस्ते, ${userName}`;
+                showScreen('chapter-list-screen');
+                loadChapterList();
+                console.log(`Login successful for user: ${userName}`);
+            } else {
+                alert('कृपया अपना नाम दर्ज करें।');
+                console.log("Name input was empty.");
+            }
+        }
+
+        function loadChapterList() {
+            console.log("loadChapterList function called.");
+            if (!chapterListUl) {
+                console.error("Error: chapterListUl element not found!");
+                return;
+            }
+            chapterListUl.innerHTML = '';
+            chapters.forEach((chapter, index) => {
+                if (chapter) {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.textContent = chapter.title;
+                    link.dataset.chapterIndex = index;
+                    link.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        readChapter(parseInt(event.target.dataset.chapterIndex));
+                    });
+                    listItem.appendChild(link);
+                    chapterListUl.appendChild(listItem);
+                    console.log(`Added chapter: ${chapter.title}`);
+                }
+            });
+        }
+
+        function readChapter(index) {
+            console.log(`Reading chapter index: ${index}`);
+            currentChapterIndex = index;
+            currentPageIndex = 0;
+            showScreen('story-screen');
+            renderStoryPage();
+        }
+
+        function renderStoryPage() {
+            console.log(`Rendering story page: Chapter ${currentChapterIndex}, Page ${currentPageIndex}`);
+            const chapter = chapters[currentChapterIndex];
+            if (!chapter) {
+                console.error("Chapter not found for rendering:", currentChapterIndex);
+                return;
+            }
+            if (!storyTitleEl || !storyPageContentEl || !pageIndicatorEl || !prevPageBtn || !nextPageBtn) {
+                console.error("One or more story screen elements not found!");
+                return;
+            }
+
+            storyTitleEl.textContent = chapter.title;
+            storyPageContentEl.textContent = chapter.pages[currentPageIndex];
+            pageIndicatorEl.textContent = `पृष्ठ ${currentPageIndex + 1} / ${chapter.pages.length}`;
+
+            prevPageBtn.disabled = (currentPageIndex === 0);
+            nextPageBtn.disabled = (currentPageIndex === chapter.pages.length - 1);
+            console.log(`Page rendered. Prev disabled: ${prevPageBtn.disabled}, Next disabled: ${nextPageBtn.disabled}`);
+
+            const storyContentContainer = document.getElementById('story-content-container');
+            if (storyContentContainer) {
+                storyContentContainer.scrollTop = 0;
+            }
+        }
+
+        function nextPage() {
+            console.log("Next page button clicked.");
+            if (currentChapterIndex > 0 && currentPageIndex < chapters[currentChapterIndex].pages.length - 1) {
+                currentPageIndex++;
+                renderStoryPage();
+            }
+        }
+
+        function prevPage() {
+            console.log("Previous page button clicked.");
+            if (currentPageIndex > 0) {
+                currentPageIndex--;
+                renderStoryPage();
+            }
+        }
+
+        function goHome() {
+            console.log("Home button clicked.");
+            showScreen('chapter-list-screen');
+        }
+        
+        // PWA Service Worker रजिस्ट्रेशन
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(registration => {
+                      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
