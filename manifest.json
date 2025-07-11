@@ -1,7 +1,7 @@
 {
   "name": "Love Story Hindi",
   "short_name": "Love Story",
-  "start_url": "./love_story_hindi.html",
+  "start_url": "/love-story-hindi-app/index.html"
   "display": "standalone",
   "background_color": "#fce4ec",
   "theme_color": "#e91e63",
