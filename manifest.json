@@ -1,0 +1,21 @@
+{
+  "name": "Love Story Hindi",
+  "short_name": "Love Story",
+  "start_url": "./love_story_hindi.html",
+  "display": "standalone",
+  "background_color": "#fce4ec",
+  "theme_color": "#e91e63",
+  "description": "मोबाइल-फ्रेंडली हिंदी प्रेम कहानियों का ऐप",
+  "icons": [
+    {
+      "src": "images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
